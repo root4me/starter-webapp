@@ -9,12 +9,20 @@ var router = express.Router();
 var samplesdata = require('../data/samples');
 
 router.get('/', function(req, res, next) {
-  console.log('get all');
 
-  // call data helper method
+    // call data helper method
   samplesdata.getAll(function(err,data){
-    res.send('go all');
-  });  
+    res.send(data);
+  });
+});
+
+router.post('/', function(req,res,next){
+
+  samplesdata.insert(function(err,data){
+    res.send(data);
+  });
+
+
 });
 
 module.exports = router;
