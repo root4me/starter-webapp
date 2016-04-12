@@ -9,13 +9,20 @@ var router = express.Router();
 var samplesdata = require('../data/samples');
 
 router.get('/', function(req, res, next) {
-  res.send('get samples view');
+
+    // call data helper method
+  samplesdata.getAll(function(err,data){
+    res.send(data);
+  });
 });
 
 router.post('/', function(req,res,next){
 
-  res.send('Post samples view');
-  
+  samplesdata.insert(function(err,data){
+    res.send(data);
+  });
+
+
 });
 
 module.exports = router;
