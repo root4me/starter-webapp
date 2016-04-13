@@ -12,7 +12,7 @@ router.get('/api/', function(req, res, next) {
 router.get('/', function(req, res, next) {
 
   var status = { status: "alive" };
-  res.send("alive");
+  res.render("home");
 
 });
 

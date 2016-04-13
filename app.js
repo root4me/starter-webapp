@@ -6,14 +6,23 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var samplesApi = require('./routes/samplesapi');
+var samplesapi = require('./routes/samplesapi');
 var samples = require('./routes/samples');
+
+var exphbs  = require('express-handlebars');
 
 var app = express();
 
+var hbs = exphbs.create({
+        defaultLayout: 'main'
+ });
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -24,7 +33,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/api/samples', samplesApi);
+app.use('/api/samples', samplesapi);
 app.use('/samples', samples);
 
 // catch 404 and forward to error handler
