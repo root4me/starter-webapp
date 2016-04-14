@@ -52,7 +52,6 @@ var getAll = function(server,port, dbName, collectionName, callback){
 var insert = function(server, port, dbName, collectionName, data, callback){
 
   mongo.connect(url(server,port, dbName), function(err, db) {
-    assert.equal(null, err);
     console.log("Connected correctly to server");
     var collection = db.collection(collectionName);
 
@@ -60,7 +59,6 @@ var insert = function(server, port, dbName, collectionName, data, callback){
     console.log(data);
 
     collection.insertOne(data , function(err,docs){
-      assert.equals(null,err);
 
       console.log(err);
       callback(err,docs);

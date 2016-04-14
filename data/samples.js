@@ -9,16 +9,13 @@ var getAll = function(callback){
   });
 };
 
-var insert = function(callback){
-  var sampleData = {
-    country : "USA",
-    capital : "Washington, D.C"
-  };
+var insert = function(data, callback){
 
-  mh.insert(config.database.server,config.database.port,config.database.db,'samples',sampleData, function(err,data){
+  mh.insert(config.database.server,config.database.port,config.database.db,'samples',data, function(err,data){
     callback(err,data);
   });
 };
+
 
 module.exports.getAll = getAll;
 module.exports.insert = insert;
