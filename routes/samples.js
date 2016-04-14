@@ -11,25 +11,21 @@ var samplesdata = require('../data/samples');
 router.get('/', function(req, res, next) {
 
   samplesdata.getAll(function(err,data){
-//res.send('got all');
-//res.send(data);
-var d = '{ countries: ' + data + "}";
-console.log(d);
-
-    res.render('samples/index', data );
+    // Going to get an array of rows from getAll. wrap it around a selector before supplying it to the view
+    res.render('samples/index', {
+      countries : data
+    } );
   });
-
 });
 
 router.post('/', function(req,res,next){
 
-  // gather values from data element and send it to samplesdata insert method
+  // gather values from data element and send it to  insert method
   var dat = {
     country : req.body.txtCountry,
     capital : req.body.txtCapital
   };
 
-  console.log(dat);
   samplesdata.insert(dat, function(err,data){
     res.send(dat);
   });
