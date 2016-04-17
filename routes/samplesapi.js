@@ -18,10 +18,14 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req,res,next){
 
-  samplesdata.insert(function(err,data){
-    res.send(data);
-  });
+  var dat = {
+    country : req.body.country,
+    capital : req.body.capital
+  };
 
+  samplesdata.insert(dat, function(err,data){
+    res.send(dat);
+  });
 
 });
 
