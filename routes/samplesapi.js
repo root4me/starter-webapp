@@ -29,4 +29,15 @@ router.post('/', function(req,res,next){
 
 });
 
+router.delete('/', function(req, res, next) {
+
+  var id = req.body.id;
+
+    // call data helper method
+  samplesdata.delete(id,function(err,data){
+    res.send(data);
+  });
+});
+
+
 module.exports = router;
