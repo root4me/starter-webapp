@@ -128,7 +128,7 @@ grunt.initConfig({
       livereload: true
     },
     scss: {
-      files: '<%= config.app %>/scss/*',
+      files: 'scss/*',
       tasks: ['sass']
     },
     express: {

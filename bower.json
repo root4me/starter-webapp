@@ -1,0 +1,18 @@
+{
+  "name": "starter-webapp",
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "https://github.com/root4me/starter-webapp",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.3"
+  }
+}
