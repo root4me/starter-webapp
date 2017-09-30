@@ -1,175 +1,89 @@
+'use strict';
+
+var request = require('request');
+
 module.exports = function(grunt) {
-
-  // Time how long tasks take.
+  // show elapsed time at the end
   require('time-grunt')(grunt);
-
-  // Load grunt tasks automatically
+  // load all grunt tasks
   require('load-grunt-tasks')(grunt);
 
-  // Configurations
-  var config = {
-    app: 'app',
-    dist: 'dist',
-    srcjs: ['js/*.*', '../bower_components/foundation/js/vendor/modernizr.js', '../bower_components/jquery/dist/jquery.js',
-    '../bower_components/foundation/js/foundation/foundation.js', '../bower_components/foundation/js/foundation/foundation.topbar.js'
-  ],
-  srcscss: ['scss/*.*'],
-  srccss: ['css/*.*', '../bower_components/foundation/css/foundation.css'],
-  srcimg: ['img/*.*'],
-};
+  var reloadPort = 35729,
+    files;
 
-// Define the configuration for all the tasks
-grunt.initConfig({
-  // Project settings
-  config: config,
-  pkg: grunt.file.readJSON('package.json'),
-
-  clean: {
-    dist: {
-      files: [{
-        dot: true,
-        src: ['.tmp', '<%= config.dist %>/*', '!<%= config.dist %>/.git*']
-      }]
-    }
-  },
-
-  processhtml: {
-    dist: {
-      files: [{
-        expand: true,
-        cwd: '<%= config.app %>',
-        src: ['*.html'],
-        dest: '<%= config.dist %>',
-        ext: '.html'
-      }],
+  grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
+    develop: {
+      server: {
+        file: 'app.js'
+      }
     },
-  },
-
-  copy: {
-    distimg: {
-      files: [{
-        expand: true,
-        cwd: '<%= config.app %>',
-        src: '<%= config.srcimg %>',
-        dest: '<%= config.dist %>',
-
-      }]
+    sass: {
+      dist: {
+        files: {
+          'public/css/style.css': 'public/css/style.scss'
+        }
+      }
     },
-
-  },
-
-  uglify: {
-    options: {
-      //                banner: '/*Packaged on : <%=grunt.template.today("yyyy-mm-dd")%>*/\n'
-    },
-    dist: {
-      files: [{
-        expand: true,
-        flatten: true,
-        extDot: 'last',
-        /* Without this jquery.xyz.js and jquery.js at source will only produce one jquery.min.js at the destination folder
-        Drove me nuts wondering why uglify seem to miss files. Turns out, i didnt read the doc close enough.
-        But, why some one thought that setting extDot default to 'first' is the best thing to do is still a mystery. Extensions usually start after the last dot !  */
-        cwd: '<%= config.app %>',
-        src: '<%= config.srcjs %>',
-        dest: '<%= config.dist %>/js',
-        ext: '.min.js'
-      }]
-    },
-  },
-  cssmin: {
-    options: {
-      processImport: false,
-    },
-    dist: {
-      files: [{
-        expand: true,
-        flatten: true,
-        cwd: '<%= config.app %>',
-        src: '<%= config.srccss %>',
-        dest: '<%= config.dist %>/css',
-        ext: '.min.css'
-      }]
-    }
-  },
-
-  sass: {
-    options: {
-      sourceMap: true,
-      style: 'expanded'
-    },
-    dist: {
-      files: [{
-        expand: true,
-        cwd: 'scss',
-        src: ['*.scss'],
-        dest: 'public/stylesheets',
-        ext: '.css'
-      }]
-    }
-  },
-  htmlmin: {
-    dist: {
+    watch: {
       options: {
-        removeComments: true,
-        collapseWhitespace: true
+        nospawn: true,
+        livereload: reloadPort
       },
-      files: [{
-        expand: true,
-        cwd: '<%= config.dist %>',
-        src: '**/*.html',
-        dest: '<%= config.dist %>',
-      }]
-    },
-
-  },
-  watch: {
-    options: {
-      livereload: true
-    },
-    scss: {
-      files: 'scss/*',
-      tasks: ['sass']
-    },
-    express: {
-      files: ['**/*.js', '**/*.handlebars'],
-      tasks: ['express:dev'],
-      options: {
-        spawn: false
+      js: {
+        files: [
+          'app.js',
+          'app/**/*.js',
+          'config/*.js'
+        ],
+        tasks: ['develop', 'delayed-livereload']
+      },
+      css: {
+        files: [
+          'public/css/*.scss'
+        ],
+        tasks: ['sass'],
+        options: {
+          livereload: reloadPort
+        }
+      },
+      views: {
+        files: [
+          'app/views/*.handlebars',
+          'app/views/**/*.handlebars'
+        ],
+        options: {
+          livereload: reloadPort
+        }
       }
     }
-  },
+  });
 
-  express: {
-    options: {
+  grunt.config.requires('watch.js.files');
+  files = grunt.config('watch.js.files');
+  files = grunt.file.expand(files);
 
-    },
-    dev: {
-      options: {
-        script: 'bin/www',
-      }
-    }
-  },
-});
+  grunt.registerTask('delayed-livereload', 'Live reload after the node server has restarted.', function() {
+    var done = this.async();
+    setTimeout(function() {
+      request.get('http://localhost:' + reloadPort + '/changed?files=' + files.join(','), function(err, res) {
+        var reloaded = !err && res.statusCode === 200;
+        if (reloaded)
+          grunt.log.ok('Delayed live reload successful.');
+        else
+          grunt.log.error('Unable to make a delayed live reload.');
+        done(reloaded);
+      });
+    }, 500);
+  });
 
-//grunt.registerTask('default', ['clean:dist', 'copy:srcimg', 'copy:distimg', 'processhtml', 'cssmin', 'uglify', 'htmlmin']);
+  grunt.registerTask('default', ['usage']);
+  grunt.registerTask('dev', ['sass', 'develop', 'watch']);
 
-grunt.loadNpmTasks('grunt-contrib-watch');
-grunt.loadNpmTasks('grunt-express-server');
-
-grunt.registerTask('default', ['usage']);
-grunt.registerTask('dev', ['sass', 'express', 'watch']);
-grunt.registerTask('build', ['clean:dist','sass', 'copy:distimg', 'processhtml', 'cssmin', 'uglify', 'htmlmin']);
-grunt.registerTask('build-nomin', ['clean:dist','sass', 'copy:distimg', 'processhtml']);
-
-grunt.registerTask('usage', 'display usage parameters', function() {
-  console.log("usage :");
-  console.log("\t grunt clean:dist - cleans /dist folder");
-  console.log("\t grunt dev - development mode");
-  console.log("\t grunt build - build and update minimized version to /dist folder");
-  console.log("\t grunt build-nomin  - build and update non minified version to /dist folder");
-});
-
-// add sass to the grunt file
+  grunt.registerTask('usage', 'display usage parameters', function() {
+    console.log("usage :");
+    console.log("\t grunt dev - development mode");
+    console.log("\t grunt build - build and update minimized version to /dist folder");
+  });
 
 };

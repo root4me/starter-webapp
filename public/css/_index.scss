@@ -1,0 +1,74 @@
+.header {
+	margin-bottom: 1em;
+	height       : 40vh;
+	background   : -moz-linear-gradient(45deg, rgba(153,218,255,1) 0%, rgba(0,128,128,1) 100%);
+	/* ff3.6+ */
+	background   : -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(153,218,255,1)), color-stop(100%, rgba(0,128,128,1)));
+	/* safari4+,chrome */
+	background   : -webkit-linear-gradient(45deg, rgba(153,218,255,1) 0%, rgba(0,128,128,1) 100%);
+	/* safari5.1+,chrome10+ */
+	background   : -o-linear-gradient(45deg, rgba(153,218,255,1) 0%, rgba(0,128,128,1) 100%);
+	/* opera 11.10+ */
+	background   : -ms-linear-gradient(45deg, rgba(153,218,255,1) 0%, rgba(0,128,128,1) 100%);
+	/* ie10+ */
+	background   : linear-gradient(360deg, $primary-color-dark 0%, $primary-color 100%);
+	/* w3c */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=  '#008080', endColorstr='#99DAFF',GradientType=1 );
+	/* ie6-9 */
+	.header-content {
+		padding-top: 20vh;
+		color      : $primary-light-text-color;
+		text-align : center;
+
+		.content {
+			padding      : 10px 20px;
+			background   : black;
+			border-radius: 5px;
+			border       : 1px solid #5cb3c3;
+		}
+	}
+}
+// BEGIN Styles for search
+// END Styles for search
+// BEGIN Styles for weather overview
+
+.weather-overview {
+	width     : 100%;
+	margin    : 0;
+	left      : 0;
+	text-align: center;
+
+	.forecast {
+		font-size: 1.25rem;
+	}
+
+	.city {
+		font-size: 1.5625rem;
+	}
+
+	.temperatureValue {
+		//text-align: center;
+		font-size: 1.25rem;
+	}
+}
+// END Styles for weather overview
+// BEGIN Article feed
+
+.article-feed {
+	width     : 100%;
+	margin    : 0;
+	left      : 0;
+	min-height: 100px;
+
+	.title {
+		color: $primary-dark-text-color;
+		//text-transform: uppercase;
+	}
+
+	.postedby {
+		color  : $secondary-dark-text-color;
+		margin : 0 0 10px;
+		display: inline-block;
+	}
+}
+// END Article feed
