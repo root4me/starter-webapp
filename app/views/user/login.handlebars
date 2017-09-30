@@ -1,0 +1,22 @@
+<div class="login-wrapper">
+  <div class="row">
+    <div class="columns">
+
+      <div class="card">
+        <h1><span class="fa fa-sign-in"></span> Log In</h1>
+        {{#if message}}
+          <div class="callout alert">{{message}}</div>
+        {{/if}}
+        <form action="/login" method="post">
+          <input type="hidden" name="originalUrl" id="originalUrl" value="{{ originalUrl }}" />
+          <label>User Name</label>
+          <input type="text" name="email" id="email" value="admin" />
+          <label>Password</label>
+          <input type="password" name="password" id="password" value="pass" />
+          <button type="submit" class="button small-12">Login</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,37 @@
+.card {
+  padding           : 10px;
+  margin-bottom     : 2px;
+  background        : white;
+  border-radius     : 2px;
+  display           : block;
+  position          : relative;
+  z-index           : 10;
+  -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.24);
+  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow   : 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.24);
+  /* Firefox 3.5 - 3.6 */
+  box-shadow        : 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.24);
+  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+  border-top        : 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.card-with-leftborder {
+  @extend .card;
+  border-left: 10px solid $primary-color;
+}
+
+.card-with-leftborder:hover {
+  z-index           : 20;
+  -webkit-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16), 0 3px 6px 0 rgba(0, 0, 0, 0.23);
+  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow   : 0 3px 6px 0 rgba(0, 0, 0, 0.16), 0 3px 6px 0 rgba(0, 0, 0, 0.23);
+  /* Firefox 3.5 - 3.6 */
+  box-shadow        : 0 3px 6px 0 rgba(0, 0, 0, 0.16), 0 3px 6px 0 rgba(0, 0, 0, 0.23);
+  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+  -webkit-transition: 0.3s ease;
+  -moz-transition   : 0.3s ease;
+  -ms-transition    : 0.3s ease;
+  -o-transition     : 0.3s ease;
+  transition        : 0.3s ease;
+  border-left       : 10px solid $primary-color-dark;
+}

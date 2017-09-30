@@ -1,0 +1,24 @@
+<div class="login-wrapper">
+  <div class="row">
+    <div class="columns">
+
+      <div class="card">
+        <h1><span class="fa fa-sign-in"></span> Signup</h1>
+        {{#if message}}
+          <div class="callout alert">{{message}}</div>
+        {{/if}}
+
+        <form action="/signup" method="post">
+          <input type="text" name="email" placeholder="user Name">
+          <input type="password" name="password" placeholder="Password">
+          <button type="submit" class="button">Signup</button>
+        </form>
+
+        <hr>
+        <p>Already have an account? <a href="/login">Login</a></p>
+        <p>Or go <a href="/">home</a>.</p>
+
+      </div>
+    </div>
+
+  </div>

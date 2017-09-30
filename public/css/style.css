@@ -1,0 +1,121 @@
+html {
+  font-size: 16px; }
+
+body {
+  font-family: "Roboto", "PT Sans", sans-serif, Helvetica, Arial;
+  background-color: rgba(0, 0, 0, 0.02);
+  background-size: cover;
+  background-attachment: fixed;
+  content: '';
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  height: 100%; }
+
+.main-wrapper {
+  min-height: 100vh;
+  flex-direction: column; }
+
+.content-wrapper {
+  overflow: auto;
+  padding-bottom: 20px; }
+
+.header {
+  margin-bottom: 1em;
+  height: 40vh;
+  background: -moz-linear-gradient(45deg, #99daff 0%, teal 100%);
+  /* ff3.6+ */
+  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, #99daff), color-stop(100%, teal));
+  /* safari4+,chrome */
+  background: -webkit-linear-gradient(45deg, #99daff 0%, teal 100%);
+  /* safari5.1+,chrome10+ */
+  background: -o-linear-gradient(45deg, #99daff 0%, teal 100%);
+  /* opera 11.10+ */
+  background: -ms-linear-gradient(45deg, #99daff 0%, teal 100%);
+  /* ie10+ */
+  background: linear-gradient(360deg, #388E3C 0%, #4CAF50 100%);
+  /* w3c */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=  '#008080', endColorstr='#99DAFF',GradientType=1 );
+  /* ie6-9 */ }
+  .header .header-content {
+    padding-top: 20vh;
+    color: white;
+    text-align: center; }
+    .header .header-content .content {
+      padding: 10px 20px;
+      background: black;
+      border-radius: 5px;
+      border: 1px solid #5cb3c3; }
+
+.weather-overview {
+  width: 100%;
+  margin: 0;
+  left: 0;
+  text-align: center; }
+  .weather-overview .forecast {
+    font-size: 1.25rem; }
+  .weather-overview .city {
+    font-size: 1.5625rem; }
+  .weather-overview .temperatureValue {
+    font-size: 1.25rem; }
+
+.article-feed {
+  width: 100%;
+  margin: 0;
+  left: 0;
+  min-height: 100px; }
+  .article-feed .title {
+    color: #212121; }
+  .article-feed .postedby {
+    color: #727272;
+    margin: 0 0 10px;
+    display: inline-block; }
+
+.card, .card-with-leftborder {
+  padding: 10px;
+  margin-bottom: 2px;
+  background: white;
+  border-radius: 2px;
+  display: block;
+  position: relative;
+  z-index: 10;
+  -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.24);
+  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.24);
+  /* Firefox 3.5 - 3.6 */
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.24);
+  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+  border-top: 1px solid rgba(0, 0, 0, 0.12); }
+
+.card-with-leftborder {
+  border-left: 10px solid #4CAF50; }
+
+.card-with-leftborder:hover {
+  z-index: 20;
+  -webkit-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16), 0 3px 6px 0 rgba(0, 0, 0, 0.23);
+  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16), 0 3px 6px 0 rgba(0, 0, 0, 0.23);
+  /* Firefox 3.5 - 3.6 */
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16), 0 3px 6px 0 rgba(0, 0, 0, 0.23);
+  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+  -webkit-transition: 0.3s ease;
+  -moz-transition: 0.3s ease;
+  -ms-transition: 0.3s ease;
+  -o-transition: 0.3s ease;
+  transition: 0.3s ease;
+  border-left: 10px solid #388E3C; }
+
+.login-wrapper {
+  /* Small only */
+  /* Medium and up */ }
+  @media screen and (max-width: 39.9375em) {
+    .login-wrapper {
+      margin-left: 10%;
+      margin-right: 10%;
+      margin-top: 50%; } }
+  @media screen and (min-width: 40em) {
+    .login-wrapper {
+      padding-left: 30%;
+      padding-right: 30%;
+      padding-top: 20%; } }

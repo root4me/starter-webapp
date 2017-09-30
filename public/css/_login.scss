@@ -1,0 +1,14 @@
+.login-wrapper {
+  /* Small only */
+  @media screen and (max-width: 39.9375em) {
+    margin-left : 10%;
+    margin-right: 10%;
+    margin-top  : 50%;
+  }
+  /* Medium and up */
+  @media screen and (min-width: 40em) {
+    padding-left : 30%;
+    padding-right: 30%;
+    padding-top  : 20%;
+  }
+}
