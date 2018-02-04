@@ -30,29 +30,27 @@ module.exports = function(app, passport) {
   });
 
   router.post('/signup', passport.authenticate('local-signup', {
-    successRedirect: '/profile', // redirect to the secure profile section
-    failureRedirect: '/signup', // redirect back to the signup page if there is an error
-    failureFlash: true // allow flash messages
+    successRedirect: '/profile',
+    failureRedirect: '/signup',
+    failureFlash: true
   }));
 
   router.post('/login', passport.authenticate('local-login', {
-    successRedirect: '/profile', // redirect to the secure profile section
-    failureRedirect: '/login', // redirect back to the signup page if there is an error
-    failureFlash: true // allow flash messages
+    successReturnToOrRedirect: '/profile',
+    failureRedirect: '/login',
+    failureFlash: true
   }));
 
 };
 
-router.get('/hello', isLoggedIn, function(req, res) {
-  res.send('look at me!');
-});
+var isLoggedIn = function(req, res, next) {
 
-function isLoggedIn(req, res, next) {
-
-  // if user is authenticated in the session, carry on
-  if (req.isAuthenticated())
+  if (req.isAuthenticated()) {
     return next();
-
-  // if they aren't redirect them to the home page
-  res.redirect('/');
+  } else {
+    req.session.returnTo = req.url;
+    res.redirect('/login');
+  }
 }
+
+module.exports.isLoggedIn = isLoggedIn;
